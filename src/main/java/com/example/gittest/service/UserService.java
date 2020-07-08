@@ -15,4 +15,19 @@ public interface UserService {
     UserVo findUserByName(String userName);
     /** * 查询所有 * @return */
     List<UserVo> findAll();
+
+    //使用mapper实现增删改
+
+    boolean addUserMapper(UserVo userVo);
+
+    boolean deleteUserMapper(UserVo userVo);
+
+    List<UserVo> findUserByIdMaapper(int id);
+
+    List<UserVo> findUserByNameMaapper(String name);
+
+    List<UserVo> findUserByAgeMaapper(int age);
+
+    boolean updataUserMapper(UserVo userVo);
+
 }

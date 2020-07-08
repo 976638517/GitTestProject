@@ -5,9 +5,8 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-@Mapper
-public interface UserDao {
 
+public interface UserDao {
 
         // 用户数据新增
 
@@ -26,7 +25,7 @@ public interface UserDao {
 
         //根据用户名称查询用户信息
 
-        @Select("SELECT id,name,age FROM t_user where name=#{userName}")
+      //  @Select("SELECT id,name,age FROM t_user where name=#{userName}")
         UserVo findByName(@Param("userName") String userName);
 
         //查询所有
