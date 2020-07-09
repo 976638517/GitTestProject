@@ -135,9 +135,13 @@ targetRuntime=“MyBatis3Simple“可以生成基本的增删改查
 
         注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
      -->
-          <table schema="root" tableName="tb_user" domainObjectName="UserVO" enableCountByExample="true"
+          <table schema="root" tableName="dept" domainObjectName="DeptVo" enableCountByExample="true"
                  enableUpdateByExample="true"  enableInsert="true"
-                 enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>
+                 enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false"></table>
+        <table schema="root" tableName="emp" domainObjectName="EmpVo" enableCountByExample="true"
+               enableUpdateByExample="true"  enableInsert="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="false"></table>
+
 
 
 
