@@ -1,11 +1,23 @@
 package com.example.gittest.bean;
 
+import java.util.List;
+
 public class DeptVo {
     private Integer deptno;
 
     private String dname;
 
     private String loc;
+
+    private List<EmpVo> empVoList;
+
+    public List<EmpVo> getEmpVoList() {
+        return empVoList;
+    }
+
+    public void setEmpVoList(List<EmpVo> empVoList) {
+        this.empVoList = empVoList;
+    }
 
     public Integer getDeptno() {
         return deptno;

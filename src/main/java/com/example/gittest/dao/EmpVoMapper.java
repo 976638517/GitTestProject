@@ -11,16 +11,26 @@ public interface EmpVoMapper {
 
     int deleteByExample(EmpVoExample example);
 
+    int deleteByPrimaryKey(Integer empno);
+
     int insert(EmpVo record);
 
     int insertSelective(EmpVo record);
 
     List<EmpVo> selectByExample(EmpVoExample example);
 
+    EmpVo selectByPrimaryKey(Integer empno);
+
     int updateByExampleSelective(@Param("record") EmpVo record, @Param("example") EmpVoExample example);
 
     int updateByExample(@Param("record") EmpVo record, @Param("example") EmpVoExample example);
 
+    int updateByPrimaryKeySelective(EmpVo record);
+
+    int updateByPrimaryKey(EmpVo record);
     @Select("select *from emp")
     List<EmpVo> selectAll();
+
+    List<EmpVo> empAndDept(@Param("id")Integer id);
+
 }

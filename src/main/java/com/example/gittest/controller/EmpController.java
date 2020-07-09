@@ -1,10 +1,9 @@
 package com.example.gittest.controller;
 
+import com.example.gittest.bean.DeptVo;
 import com.example.gittest.bean.EmpVo;
 import com.example.gittest.service.ServiceImpl.EmpServiceImpl;
-import org.hibernate.bytecode.enhance.internal.bytebuddy.EnhancerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,18 +23,60 @@ public class EmpController {
     List<EmpVo> selectEmpByEmpno(@RequestParam(name = "empno") Integer empon){
         return empService.selectEmpByEmpno(empon);
     }
-    @RequestMapping("/selectEmpByEmame/{ename}")
-    List<EmpVo> selectEmpByEmame(@PathVariable(name = "ename") String ename){
+    @RequestMapping("/selectEmpByEmame")
+    List<EmpVo> selectEmpByEmame(@RequestParam(name = "ename") String ename){
         return empService.selectEmpByEmame(ename);
     }
-    @RequestMapping("/selectEmpByJob/{job}")
-    List<EmpVo> selectEmpByJob(@PathVariable(name = "job") String job){
+    @RequestMapping("/selectEmpByJob")
+    List<EmpVo> selectEmpByJob(@RequestParam(name = "job") String job){
         return empService.selectEmpByJob(job);
     }
-    @RequestMapping("/selectEmpByMgr/{mgr}")
-    List<EmpVo> selectEmpByMgr(@PathVariable(name = "mgr") Integer mgr){
+    @RequestMapping("/selectEmpByMgr")
+    List<EmpVo> selectEmpByMgr(@RequestParam(name = "mgr") Integer mgr){
         return empService.selectEmpByMgr(mgr);
     }
+    @RequestMapping("/selectEmpByDate")
+    List<EmpVo> selectEmpByDate(@RequestParam(name = "a") String a,@RequestParam(name = "b") String b){
+        return empService.selectEmpByDate(a,b);
+    }
+    @RequestMapping("/selectEmpBySal")
+    List<EmpVo> selectEmpBySal(@RequestParam(name = "sal") Integer sal){
 
+        return empService.selectEmpBySal(sal);
+    }
+    @RequestMapping("/selectEmpByComm")
+    List<EmpVo> selectEmpByComm(@RequestParam(name = "comm") Integer comm){
+        return empService.selectEmpByComm(comm);
+    }
+
+    @RequestMapping("/addEmp")
+    boolean addEmp(EmpVo empVo){
+        if (empService.addEmp(empVo)!=0)
+            return true;
+        else
+            return false;
+    }
+    @RequestMapping("/deleteEmp")
+    boolean deleteEmp(EmpVo empVo){
+        if (empService.deleteEmp(empVo)!=0)
+            return true;
+        else
+            return false;
+    }
+    @RequestMapping("/updateEmp")
+    boolean updateEmp(EmpVo empVo){
+        if (empService.updateEmp(empVo)!=0)
+            return true;
+        else
+            return false;
+    }
+    @RequestMapping("/empAndDept")
+    List<EmpVo> empAndDept(@RequestParam(name = "id") Integer comm){
+        return empService.empAndDept(comm);
+    }
+    @RequestMapping("/selectDeptAndEmp")
+    List<DeptVo> selectDeptAndEmp(){
+        return empService.selectDeptAndEmp();
+    }
 
 }

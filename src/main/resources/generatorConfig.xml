@@ -34,8 +34,8 @@ targetRuntime=“MyBatis3Simple“可以生成基本的增删改查
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/test?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;zeroDateTimeBehavior=convertToNull"
-                userId="root" password="123456">
+                connectionURL="jdbc:mysql://192.168.1.188:3306/test?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;zeroDateTimeBehavior=convertToNull"
+                userId="root" password="szwg2018">
         </jdbcConnection>
         <javaTypeResolver>
                 <!--

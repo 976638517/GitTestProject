@@ -19,6 +19,16 @@ public class EmpVo {
 
     private Integer deptno;
 
+    private DeptVo deptVo;
+
+    public DeptVo getDeptVo() {
+        return deptVo;
+    }
+
+    public void setDeptVo(DeptVo deptVo) {
+        this.deptVo = deptVo;
+    }
+
     public Integer getEmpno() {
         return empno;
     }
