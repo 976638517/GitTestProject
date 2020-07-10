@@ -43,5 +43,7 @@ public interface EmpService {
     int updataBySet(EmpVo empVo);
     //动态sql 批量插入
     int insertDeptlist(List<DeptVo> deptlist);
+    //动态sql 批量插入
+    int insertEmplist(List<EmpVo> emplist);
 
 }

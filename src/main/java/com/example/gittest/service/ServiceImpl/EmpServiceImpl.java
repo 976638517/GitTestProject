@@ -136,4 +136,8 @@ public class EmpServiceImpl implements EmpService {
     public int insertDeptlist(List<DeptVo> deptlist) {
         return deptVoMapper.insertDeptlist(deptlist);
     }
+    @Override
+    public  int insertEmplist(List<EmpVo> emplist){
+        return empVoMapper.insertEmplist(emplist);
+    }
 }

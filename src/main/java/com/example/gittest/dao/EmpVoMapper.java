@@ -36,4 +36,6 @@ public interface EmpVoMapper {
     List<EmpVo> selectBywhere(EmpVo empVo);
 
     int updataBySet(EmpVo empVo);
+
+    int insertEmplist(@Param("emplist") List<EmpVo> emplist);
 }

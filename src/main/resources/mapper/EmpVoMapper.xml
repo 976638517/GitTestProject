@@ -90,7 +90,13 @@
         where #{empno}=empno
     </update>
 
-
+    <!--动态sql批量插入-->
+    <insert id="insertEmplist">
+        insert into emp(empno,ename,job,mgr,hiredate,sal,comm,deptno) values
+        <foreach collection="emplist" item="emp" separator=",">
+            (#{emp.empno},#{emp.ename},#{emp.job},#{emp.mgr},#{emp.hiredate},#{emp.sal},#{emp.comm},#{emp.deptno})
+        </foreach>
+    </insert>
 
 
 
