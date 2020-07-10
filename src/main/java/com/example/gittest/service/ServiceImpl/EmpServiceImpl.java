@@ -121,4 +121,19 @@ public class EmpServiceImpl implements EmpService {
     public List<DeptVo> selectDeptAndEmp() {
         return deptVoMapper.selectDeptAndEmp();
     }
+
+    @Override
+    public List<EmpVo> selectBywhere(EmpVo empVo) {
+        return empVoMapper.selectBywhere(empVo);
+    }
+
+    @Override
+    public int updataBySet(EmpVo empVo) {
+        return empVoMapper.updataBySet(empVo);
+    }
+
+    @Override
+    public int insertDeptlist(List<DeptVo> deptlist) {
+        return deptVoMapper.insertDeptlist(deptlist);
+    }
 }

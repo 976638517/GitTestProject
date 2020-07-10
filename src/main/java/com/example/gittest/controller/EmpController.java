@@ -4,13 +4,13 @@ import com.example.gittest.bean.DeptVo;
 import com.example.gittest.bean.EmpVo;
 import com.example.gittest.service.ServiceImpl.EmpServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+
 public class EmpController {
 
     @Autowired
@@ -77,6 +77,26 @@ public class EmpController {
     @RequestMapping("/selectDeptAndEmp")
     List<DeptVo> selectDeptAndEmp(){
         return empService.selectDeptAndEmp();
+    }
+
+    @RequestMapping("/selectBywhere")
+    List<EmpVo> selectBywhere(EmpVo empVo) {
+        return empService.selectBywhere(empVo);
+    }
+
+    @RequestMapping("/updataBySet")
+    Boolean updataBySet(EmpVo empVo) {
+        if (empService.updataBySet(empVo)!=0)
+            return true;
+        else
+            return false;
+    }
+
+    //传入collection如何
+    @RequestMapping(value = "insertDeptlist",method = RequestMethod.POST)
+    int insertDeptlist(@RequestParam(name = "deptlist") List<DeptVo> deptlist) {
+
+        return empService.insertDeptlist(deptlist);
     }
 
 }

@@ -6,7 +6,7 @@
     <result column="DNAME" jdbcType="VARCHAR" property="dname" />
     <result column="LOC" jdbcType="VARCHAR" property="loc" />
   </resultMap>
-
+<!--dept左连接，查询结果是deptvo里面是list<emp>-->
   <resultMap id="DeptAndEmp" type="com.example.gittest.bean.DeptVo">
     <id column="DEPTNO" jdbcType="INTEGER" property="deptno" />
     <result column="DNAME" jdbcType="VARCHAR" property="dname" />
@@ -19,6 +19,16 @@
   <select id="selectDeptAndEmp" resultMap="DeptAndEmp">
     select *from dept d LEFT JOIN emp e on e.DEPTNO=d.DEPTNO ;
   </select>
+
+<!--动态sql批量插入-->
+  <insert id="insertDeptlist">
+    insert into dept(deptno,dname,loc) values
+    <foreach collection="deptlist" item="dept" separator=",">
+      (#{dept.deptno},#{dept.dname},#{dept.loc})
+    </foreach>
+  </insert>
+
+
 
   <sql id="Example_Where_Clause">
     <where>

@@ -2,6 +2,7 @@ package com.example.gittest.service;
 
 import com.example.gittest.bean.DeptVo;
 import com.example.gittest.bean.EmpVo;
+import org.apache.ibatis.annotations.Param;
 
 import javax.xml.crypto.Data;
 import java.util.List;
@@ -23,9 +24,9 @@ public interface EmpService {
     List<EmpVo> selectEmpBySal(Integer sal);
     //查询by 大于等于comm
     List<EmpVo> selectEmpByComm(Integer comm);
-    //查询by deptno
+    //查询by deptno  使用resultmap 进行复杂联合查询
     List<EmpVo> empAndDept(Integer id);
-    //按照dept查询
+    //按照 dept查询  使用嵌套查询 进行复杂联合查询
     List<DeptVo> selectDeptAndEmp();
 
     //增加
@@ -34,4 +35,13 @@ public interface EmpService {
     int deleteEmp(EmpVo empVo);
     //改
     int updateEmp(EmpVo empVo);
+
+
+    //动态sql查询 使用where
+    List<EmpVo> selectBywhere(EmpVo empVo);
+    //动态sql更改 使用set
+    int updataBySet(EmpVo empVo);
+    //动态sql 批量插入
+    int insertDeptlist(List<DeptVo> deptlist);
+
 }

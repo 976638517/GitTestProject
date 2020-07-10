@@ -33,4 +33,7 @@ public interface EmpVoMapper {
 
     List<EmpVo> empAndDept(@Param("id")Integer id);
 
+    List<EmpVo> selectBywhere(EmpVo empVo);
+
+    int updataBySet(EmpVo empVo);
 }

@@ -11,7 +11,7 @@
         <result column="COMM" jdbcType="INTEGER" property="comm" />
         <result column="DEPTNO" jdbcType="INTEGER" property="deptno" />
     </resultMap>
-
+<!--emp左连接，查询结果是empvo里面dept表-->
     <resultMap id="EmpAndDept" type="com.example.gittest.bean.EmpVo">
         <id column="EMPNO" jdbcType="INTEGER" property="empno" />
         <result column="ENAME" jdbcType="VARCHAR" property="ename" />
@@ -27,10 +27,70 @@
             <result property="loc" column="loc"></result>
         </association>
     </resultMap>
-
     <select id="empAndDept" resultMap="EmpAndDept">
         select *from emp e LEFT JOIN dept d on e.DEPTNO=d.DEPTNO where e.deptno=#{id,jdbcType=INTEGER};
     </select>
+
+<!--    动态sql查询-->
+    <select id="selectBywhere" resultType="com.example.gittest.bean.EmpVo" parameterType="com.example.gittest.bean.EmpVo">
+        select * from emp
+        <where>
+            <if test="empno!=null ">
+                and empno=#{empno}
+            </if>
+            <if test="ename!=null and ename!=''">
+                and ename=#{ename}
+            </if>
+            <if test="job!=null and job!=''">
+                and job=#{job}
+            </if>
+            <if test="mgr!=null ">
+                and mgr=#{mgr}
+            </if>
+            <if test="hiredate!=null">
+                and hiredate=#{hiredate}
+            </if>
+            <if test="sal!=null">
+                and sal=#{sal}
+            </if>
+            <if test="comm!=null">
+                and comm=#{comm}
+            </if>
+            <if test="deptno!=null">
+                and deptno=#{deptno}
+            </if>
+        </where>
+    </select>
+<!--使用set标签进行动态sql改变emp的列值-->
+    <update id="updataBySet" parameterType="com.example.gittest.bean.EmpVo">
+        update emp
+        <set>
+            <if test="ename!=null and ename!=''">
+                 ,ename=#{ename}
+            </if>
+            <if test="job!=null and job!=''">
+                 ,job=#{job}
+            </if>
+            <if test="mgr!=null ">
+                 ,mgr=#{mgr}
+            </if>
+            <if test="hiredate!=null">
+                 ,hiredate=#{hiredate}
+            </if>
+            <if test="sal!=null">
+                 ,sal=#{sal}
+            </if>
+            <if test="comm!=null">
+                 ,comm=#{comm}
+            </if>
+            <if test="deptno!=null">
+                 ,deptno=#{deptno}
+            </if>
+        </set>
+        where #{empno}=empno
+    </update>
+
+
 
 
 
