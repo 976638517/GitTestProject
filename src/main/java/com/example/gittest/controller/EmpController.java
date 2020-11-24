@@ -19,6 +19,7 @@ public class EmpController {
     List<EmpVo> selectEmpByEmpno(){
         return empService.selectEmpAll();
     }
+
     @RequestMapping("/selectEmpByEmpno")
     List<EmpVo> selectEmpByEmpno(@RequestParam(name = "empno") Integer empon){
         return empService.selectEmpByEmpno(empon);
@@ -98,5 +99,6 @@ public class EmpController {
 
         return empService.insertDeptlist(deptlist);
     }
+
 
 }

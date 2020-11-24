@@ -30,7 +30,7 @@ public interface EmpVoMapper {
     int updateByPrimaryKey(EmpVo record);
     @Select("select *from emp")
     List<EmpVo> selectAll();
-
+    
     List<EmpVo> empAndDept(@Param("id")Integer id);
 
     List<EmpVo> selectBywhere(EmpVo empVo);
