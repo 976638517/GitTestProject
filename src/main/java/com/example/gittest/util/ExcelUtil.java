@@ -13,12 +13,44 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
+
+import static jdk.nashorn.internal.objects.NativeMath.random;
 
 public class ExcelUtil {
-    public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response){
+    public static void main(String[] args) {
+        ArrayList<Integer> list= new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.add(7);
+        remove3(list);
+    }
+
+
+    public static  void remove3(ArrayList list){
+        Random random=new Random();
+        Iterator iterator = list.iterator();
+        while(iterator.hasNext()){
+            Boolean flag=random.nextBoolean();
+            System.out.println(iterator.next());
+            if(flag){
+                iterator.remove();
+            }
+            System.out.println(flag+" "+list);
+        }
+        if (!list.isEmpty()){
+            remove3(list);
+        }
+//        return list;
+    }
+
+
+
+        public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response){
         ExportParams exportParams = new ExportParams(title, sheetName);
         exportParams.setCreateHeadRows(isCreateHeader);
         defaultExport(list, pojoClass, fileName, response, exportParams);

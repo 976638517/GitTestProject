@@ -12,7 +12,7 @@ import java.util.List;
 public class DealDoc {
     public static void main(String[] args) {
         //doc文档路径
-        String filePath = "C:\\Users\\july\\Desktop\\test.doc";
+        String filePath = "C:\\Users\\july\\Desktop\\data.doc";
         //test.print(filePath,"第一个表");
         System.out.println(filePath);
         for (DataYuan dataYuan:read(filePath)){
