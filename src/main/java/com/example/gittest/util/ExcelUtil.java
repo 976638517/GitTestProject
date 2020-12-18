@@ -19,7 +19,7 @@ import static jdk.nashorn.internal.objects.NativeMath.random;
 
 public class ExcelUtil {
     public static void main(String[] args) {
-        ArrayList<Integer> list= new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -31,41 +31,42 @@ public class ExcelUtil {
     }
 
 
-    public static  void remove3(ArrayList list){
-        Random random=new Random();
+    public static void remove3(ArrayList list) {
+        Random random = new Random();
         Iterator iterator = list.iterator();
-        while(iterator.hasNext()){
-            Boolean flag=random.nextBoolean();
+        while (iterator.hasNext()) {
+            Boolean flag = random.nextBoolean();
             System.out.println(iterator.next());
-            if(flag){
+            if (flag) {
                 iterator.remove();
             }
-            System.out.println(flag+" "+list);
+            System.out.println(flag + " " + list);
         }
-        if (!list.isEmpty()){
+        if (!list.isEmpty()) {
             remove3(list);
         }
 //        return list;
     }
 
 
-
-        public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response){
+    public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, boolean isCreateHeader, HttpServletResponse response) {
         ExportParams exportParams = new ExportParams(title, sheetName);
         exportParams.setCreateHeadRows(isCreateHeader);
         defaultExport(list, pojoClass, fileName, response, exportParams);
 
     }
-    public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass,String fileName, HttpServletResponse response){
+
+    public static void exportExcel(List<?> list, String title, String sheetName, Class<?> pojoClass, String fileName, HttpServletResponse response) {
         defaultExport(list, pojoClass, fileName, response, new ExportParams(title, sheetName));
     }
-    public static void exportExcel(List<Map<String, Object>> list, String fileName, HttpServletResponse response){
+
+    public static void exportExcel(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {
         defaultExport(list, fileName, response);
     }
 
     private static void defaultExport(List<?> list, Class<?> pojoClass, String fileName, HttpServletResponse response, ExportParams exportParams) {
-        Workbook workbook = ExcelExportUtil.exportExcel(exportParams,pojoClass,list);
-        if (workbook != null);
+        Workbook workbook = ExcelExportUtil.exportExcel(exportParams, pojoClass, list);
+        if (workbook != null) ;
         downLoadExcel(fileName, response, workbook);
     }
 
@@ -80,14 +81,15 @@ public class ExcelUtil {
             throw new NormalException(e.getMessage());
         }
     }
+
     private static void defaultExport(List<Map<String, Object>> list, String fileName, HttpServletResponse response) {
         Workbook workbook = ExcelExportUtil.exportExcel(list, ExcelType.HSSF);
-        if (workbook != null);
+        if (workbook != null) ;
         downLoadExcel(fileName, response, workbook);
     }
 
-    public static <T> List<T> importExcel(String filePath,Integer titleRows,Integer headerRows, Class<T> pojoClass){
-        if (StringUtils.isBlank(filePath)){
+    public static <T> List<T> importExcel(String filePath, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
+        if (StringUtils.isBlank(filePath)) {
             return null;
         }
         ImportParams params = new ImportParams();
@@ -96,7 +98,7 @@ public class ExcelUtil {
         List<T> list = null;
         try {
             list = ExcelImportUtil.importExcel(new File(filePath), pojoClass, params);
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new NormalException("模板不能为空");
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,8 +106,9 @@ public class ExcelUtil {
         }
         return list;
     }
-    public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass){
-        if (file == null){
+
+    public static <T> List<T> importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass) {
+        if (file == null) {
             return null;
         }
         ImportParams params = new ImportParams();
@@ -114,7 +117,7 @@ public class ExcelUtil {
         List<T> list = null;
         try {
             list = ExcelImportUtil.importExcel(file.getInputStream(), pojoClass, params);
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new NormalException("excel文件不能为空");
         } catch (Exception e) {
             throw new NormalException(e.getMessage());

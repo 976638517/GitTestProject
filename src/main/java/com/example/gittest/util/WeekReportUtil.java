@@ -1,6 +1,7 @@
 package com.example.gittest.util;
 
 import com.google.common.collect.Lists;
+import org.aspectj.util.FileUtil;
 import org.thymeleaf.util.ListUtils;
 
 import java.io.BufferedReader;
@@ -11,32 +12,18 @@ import java.util.List;
 import java.util.Map;
 
 public class WeekReportUtil {
-    public static Map readText(String textPath){
-        File file = new File(textPath);
-        BufferedReader reader = null;
-        List<String> list= Lists.newLinkedList();
-
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            String tempStr;
-            while ((tempStr = reader.readLine()) != null) {
-                list.add(tempStr);
-            }
-
-            reader.close();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
+    public static String[] readText(String textPath,String sqlitStr) throws IOException {
+        File file =new File(textPath);
+        if (file.exists()&&file.isFile()){
+            String json= FileUtil.readAsString(file);
+            String[] strAry=json.split(sqlitStr);
+            return strAry;
         }
-        return null;
+        else {
+            return null;
+        }
     }
+
+//    https://my.oschina.net/laigous/blog/315829?fromerr=U9okoQjk
 
 }

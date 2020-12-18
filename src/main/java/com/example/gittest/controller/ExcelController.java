@@ -112,6 +112,7 @@ public class ExcelController {
         ImportParams params = new ImportParams();
         params.setHeadRows(1);
         params.setTitleRows(0);
+
         List<rowPojo> list = null;
         try {
             list = ExcelImportUtil.importExcel(new File(filePath), rowPojo.class, params);

@@ -10,6 +10,8 @@ import java.util.List;
 
 
 public class DealDoc {
+    static String appid="";
+    static String appkey="";
     public static void main(String[] args) {
         //doc文档路径
         String filePath = "C:\\Users\\july\\Desktop\\data.doc";
