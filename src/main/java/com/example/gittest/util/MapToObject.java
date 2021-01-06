@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.gittest.bean.DpRequestCellVo;
-import com.example.gittest.pojo.ODpDlzbxxDlzbxx;
+
 import com.google.common.base.CaseFormat;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.lang3.ObjectUtils;
@@ -101,10 +101,10 @@ public class MapToObject {
         List s=null;
         System.out.println(s.size());
         JSONObject jsonObject= JSON.parseObject(str);
-        List<ODpDlzbxxDlzbxx> list=MapToObject.jsonToCell(jsonObject,ODpDlzbxxDlzbxx.class);
-        System.out.println(list.addAll(Lists.newArrayList()));;
+//        List<ODpDlzbxxDlzbxx> list=MapToObject.jsonToCell(jsonObject,ODpDlzbxxDlzbxx.class);
+//        System.out.println(list.addAll(Lists.newArrayList()));;
 
-        System.out.println(list);
+//        System.out.println(list);
 
         System.out.println(CaseFormat.LOWER_HYPHEN.to(CaseFormat.LOWER_CAMEL, "entgeocooinfo_lat"));//testData
 

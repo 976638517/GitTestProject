@@ -9,18 +9,23 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class FileDuplicateRemoval {
-    public static String resultUrl="C:\\Users\\july\\Desktop\\dpInfo\\20201218\\1218";
-    public static String sourcesUrl="C:\\Users\\july\\Desktop\\dpInfo\\20201218\\1217";
-    public static String partUrl="C:\\Users\\july\\Desktop\\dpInfo\\20201217\\1217";
+
 
 
     public static void main(String[] args) throws IOException {
-        List<String> list=getAllDerFile(resultUrl);
+        String resultUrl="C:\\Users\\july\\Desktop\\dpInfo\\20201218\\1218-4";
+        String sourcesUrl="C:\\Users\\july\\Desktop\\dpInfo\\20201218\\1218-3";
+        String partUrl="C:\\Users\\july\\Desktop\\dpInfo\\20201209\\1208";
+        fileRemoval(resultUrl,sourcesUrl,partUrl);
+    }
+
+    public static void createTxtFile(String sourcesUrl,String resultUrl) throws IOException {
+        List<String> list=getAllDerFile(sourcesUrl);
         for (String filename:
-             list) {
+                list) {
             int index=filename.indexOf(".");
             filename=filename.substring(0, index);
-            File file =new File("C:\\Users\\july\\Desktop\\dpInfo\\20201218\\json\\"+filename+".txt");
+            File file =new File(resultUrl+filename+".txt");
             if (!file.exists()){
                 file.createNewFile();
             }
@@ -75,8 +80,11 @@ public class FileDuplicateRemoval {
         for (int i=0;i<listAll.size();i++) {
             for (String strPart:
                  listPart) {
-                if (listAll.get(i).equals(strPart))
-                listAll.remove(i);
+                if (listAll.get(i).equals(strPart)){
+                    listAll.remove(i);
+                    System.out.println(strPart);
+                }
+
             }
         }
         return listAll;

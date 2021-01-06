@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import com.example.gittest.bean.DpRequestCellVo;
+import com.example.gittest.pojo.SqlTable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.aspectj.util.FileUtil;
@@ -28,11 +29,15 @@ public class JsonTxtCreateSql {
 //        }
 //    }
 
+    public static String JDBC_int="int(11)";
+    public static String JDBC_varchar="varchar(100)";
+    public static String JDBC_bigint="bigint(20)";
+    public static String JDBC_mediumtext="mediumtext";
 
 
 
     public static void main(String[] args) {
-        String path = "C:\\Users\\july\\Desktop\\dpInfo\\20201217\\json";		//要遍历的路径
+        String path = "C:\\Users\\july\\Desktop\\dpInfo\\20201218\\json";		//要遍历的路径
         File file = new File(path);		//获取其file对象
         func(file);
     }
@@ -86,10 +91,14 @@ public class JsonTxtCreateSql {
 
 
     public static StringBuilder jsonToSql(JSONObject jsonObject,String txtname){
+        ChineseCharToEnUtil cte = new ChineseCharToEnUtil();
+        String tablename=txtname.substring(txtname.indexOf("-")+1);
+        tablename=tablename.replace("-","_");
+        tablename=cte.getAllFirstLetter(tablename);
         String type="` varchar(500) DEFAULT NULL COMMENT '";
         StringBuilder sb = new StringBuilder();
         List<DpRequestCellVo> cells = jsonObject.getJSONArray("cells").toJavaList(DpRequestCellVo.class);
-        sb.append("CREATE TABLE `o_dp_` (");
+        sb.append("CREATE TABLE `o_dp_"+tablename+"` (");
         sb.append("`id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',");
         sb.append("  `social_credit_code` varchar(100) DEFAULT NULL COMMENT '社会统一信用代码',");
         for (DpRequestCellVo dpRequestCellVo:
@@ -110,6 +119,61 @@ public class JsonTxtCreateSql {
         System.out.println(sb);
         return sb;
     }
+
+
+
+
+    public static String sqltableTosql(List<SqlTable> tables, String name,String comment){
+        System.out.println(name+comment);
+        StringBuffer sql=new StringBuffer();
+        String type=" DEFAULT NULL COMMENT '";
+        String type2=" COMMENT '";
+        sql.append("CREATE TABLE `o_wh_"+name+"` (\n");
+//        sql.append("`id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',\n");
+        sql.append("  `social_credit_code` varchar(100) DEFAULT NULL COMMENT '社会统一信用代码',\n");
+        sql.append("  `enterprise_name` varchar(100) DEFAULT NULL COMMENT '企业名',\n");
+        for (SqlTable sqlTable:
+             tables) {
+            if (ObjectUtils.isEmpty(sqlTable.getName())){
+                continue;
+            }
+            sql.append("`");
+            sql.append(sqlTable.getName());
+            sql.append("` ");
+//            if (sqlTable.getType().equals("String")||sqlTable.getType().equals("string")){
+//                sql.append(JDBC_varchar);
+//            }
+//            if (sqlTable.getType().equals("List")){
+//                sql.append(JDBC_varchar);
+//            }
+//            if (sqlTable.getType().equals("Integer")||sqlTable.getType().equals("integer")){
+//                sql.append(JDBC_int);
+//            }
+//            if (sqlTable.getType().equals("long")||sqlTable.getType().equals("Long")){
+//                sql.append(JDBC_bigint);
+//            }
+            if (sqlTable.getName().equals("uuid")){
+                sql.append(JDBC_varchar);
+                sql.append(" NOT NULL COMMENT '");
+            }
+            if (!sqlTable.getName().equals("uuid")){
+                sql.append(JDBC_mediumtext);
+                sql.append(type2);
+            }
+            sql.append(sqlTable.getValue());
+            sql.append("',\n");
+        }
+        sql.append("  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n" +
+                "  `updata_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',\n" +
+                "  PRIMARY KEY (`uuid`) USING BTREE\n" +
+                ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='");
+        sql.append(comment);
+        sql.append("';");
+        sql.append("\n");
+        return sql.toString();
+    }
+
+
 
 
 }

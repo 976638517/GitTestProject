@@ -13,17 +13,22 @@ public class dealclasss {
     static String schstr = "@Scheduled(fixedDelay = 2 * 24 * 60 * 60 * 1000)";
     static String methedStr = "public void dpSyncPart24() {";
     static String endStr = "}";
+
+    static String methodstr="    }\n" +
+            "    @Scheduled(fixedDelay = 2 * 24 * 60 * 60 * 1000)\n" +
+            "    public void dpSyncPart?() {";
     static String str1 = "List<String> errorList? = dpEntDataSync.dpEntSync(###.class, ###ServiceImpl.class, ###.appid, ###.appkey);";
     static String str2 = "dpEntDataSync.recurrenceDealerrorlist(errorList?, ###.class, ###ServiceImpl.class, ###.appid, ###.appkey);";
 
     public static void main(String[] args) throws IOException {
-        String[] strAry = WeekReportUtil.readText("C:\\Users\\july\\Desktop\\dpInfo\\20201217\\sql.txt", "CREATE TABLE `");
+        String[] strAry = WeekReportUtil.readText("C:\\Users\\july\\Desktop\\dpInfo\\20201218\\sql.txt", "CREATE TABLE `");
         dealclasss.getClassNameUtil(strAry);
     }
 
     public static void getClassNameUtil(String[] strAry) {
         StringBuffer sb = new StringBuffer();
         int x=1;
+        int y=35;
         for (String str :
                 strAry) {
             if (StringUtils.isBlank(str)){
@@ -31,6 +36,11 @@ public class dealclasss {
             }
             if (x==4){
                 x=1;
+                y++;
+            }
+            if (x==1){
+                String methodstrs=methodstr.replace("?",y+"");
+                sb.append(methodstrs);
             }
             int index = str.indexOf("`");
             String node = str.substring(0,index);
@@ -44,7 +54,9 @@ public class dealclasss {
             sb.append("\n");
             sb.append(str22);
             System.out.println(sb);
+
             sb.delete(0, sb.length());
+
             x++;
         }
     }
