@@ -1,13 +1,58 @@
 package com.example.gittest.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.gittest.bean.StatisticsDepartmentJsonDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.util.FileUtil;
+import org.springframework.http.HttpMethod;
 
 import java.io.File;
 import java.io.IOException;
 
 public class UnicodeUtil {
+    public static void main(String[] args) {
+        String jaon="[\n" +
+                "    {\n" +
+                "        \"returnparam\":\"\",\n" +
+                "        \"type\":\"\",\n" +
+                "        \"describe\":\"\",\n" +
+                "        \"id\":\"\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "        \"returnparam\":\"\",\n" +
+                "        \"type\":\"\",\n" +
+                "        \"describe\":\"\",\n" +
+                "        \"value\":[\n" +
+                "            {\n" +
+                "                \"returnparam\":\"\",\n" +
+                "                \"type\":\"\",\n" +
+                "                \"describe\":\"\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"returnparam\":\"\",\n" +
+                "                \"type\":\"\",\n" +
+                "                \"describe\":\"\"\n" +
+                "            }\n" +
+                "        ],\n" +
+                "        \"id\":\"\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "        \"returnparam\":\"\",\n" +
+                "        \"type\":\"\",\n" +
+                "        \"describe\":\"\",\n" +
+                "        \"id\":\"\"\n" +
+                "    }\n" +
+
+                "]";
+        String str="[{\"returnparam\":\"code\",\"type\":\"String\",\"describe\":\"处理结果code\",\"id\":\"16106952384790724\"},{\"returnparam\":\"data\",\"type\":\"Array\",\"describe\":\"处理结果数据信息\",\"value\":[{\"returnparam\":\"dataCount\",\"type\":\"integer\",\"describe\":\"数据条数\"},{\"returnparam\":\"dataSource\",\"type\":\"String\",\"describe\":\"数据来源\"}],\"id\":\"16106952384791907\"},{\"returnparam\":\"mesg\",\"type\":\"String\",\"describe\":\"处理结果描述信息\",\"id\":\"16106952384792103\"},{\"returnparam\":\"time\",\"type\":\"String\",\"describe\":\"请求结果生成时间戳\",\"id\":\"16106952384793172\"}]";
+        JSONArray js= JSON.parseArray(str);
+        JSONArray jsonObject= JSON.parseArray(jaon);
+        jsonObject=js;
+        System.out.println(jsonObject);
+    }
 
 
     /**

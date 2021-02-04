@@ -16,7 +16,6 @@ public class excelIOUtil {
     public static List<SqlTable> excelIN(String url) {
         ImportParams params = new ImportParams();
         params.setHeadRows(1);
-
         List<SqlTable> list = ExcelImportUtil.importExcel(
                 new File(url),
                 SqlTable.class, params);
